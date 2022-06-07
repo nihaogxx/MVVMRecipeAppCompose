@@ -1,5 +1,6 @@
 package com.example.mvvmrecipeappcompose.repository
 
+import android.util.Log
 import com.example.mvvmrecipeappcompose.domain.models.Recipe
 import com.example.mvvmrecipeappcompose.network.RetrofitService
 import com.example.mvvmrecipeappcompose.network.model.RecipeNetworkDTOMapper
@@ -11,6 +12,7 @@ class RecipeRepository_Impl(
 
     override suspend fun search(token: String, page: Int, query: String): List<Recipe> {
         val result = recipeService.search(token, page, query).recipes // DTO list
+        Log.d("repository", "result: ${result}")
         return mapper.toDomainList(result);
 
     }

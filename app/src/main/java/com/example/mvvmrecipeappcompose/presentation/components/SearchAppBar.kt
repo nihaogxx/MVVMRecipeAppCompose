@@ -18,10 +18,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.focus.FocusRequester.Companion.createRefs
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
@@ -34,9 +31,9 @@ fun SearchAppBar(
     setQuery: (String) -> Unit,
     onExecuteSearch: () -> Unit,
     selectedCategory: FoodCategory?,
-    setSelectedCategory: (String) -> Unit,
+    onChangeSelectedCategory: (String) -> Unit,
     scrollPosition: Float,
-    setScrollPosition: (Float) -> Unit,
+    onCategoryScrollPositionChanged: (Float) -> Unit,
     onToggleTheme: () -> Unit,
 ) {
 
@@ -126,8 +123,8 @@ fun SearchAppBar(
                         isSelected = selectedCategory == category,
                         onSelectedCategoryChanged = {
                             // it = category as a constructor argument
-                            setSelectedCategory(it)
-                            setScrollPosition(scrollState.value.toFloat())
+                            onChangeSelectedCategory(it)
+                            onCategoryScrollPositionChanged(scrollState.value.toFloat())
                         },
                         // delegate to newSearch fun in viewModel
                         onExecuteSearch = onExecuteSearch
